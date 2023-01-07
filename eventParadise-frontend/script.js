@@ -178,33 +178,33 @@ async function postForm(){
     };
     const url = "http://localhost:8080/events";
     let response = await fetch(url, options)
-    if(response.ok){//Check if there's any error in the form from the server
+    if(response.ok){//Check if there's any error in the form from the server    
+        return "no error";//if it is true, return a string   
+    }else{
         const headers = response.headers;
         if(headers.get("content-type") == "application/json"){
-        return await response.json(); //if not, return a response in JSON object
+        return await response.json(); //otherwise, return a response in JSON object
         }
-    }else{
-        return "Error";//otherwise, return a string
+        
     }
 }
 
 form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const response =  await postForm();
-        if(response != "Error"){
+        if(response == "no error"){
             form.reset();
             displayToaster();//the function for the toaster is called     
-        for(const element of elements){
-            const type = element.type;
-            const elementName = element.name;
-            if(type != "submit"){
-                element.classList.remove("is-valid");
-                let helpText = document.querySelector(`#${elementName}-text`);
-                helpText.classList.remove("text-success"); 
-            }                  
-        }
+            for(const element of elements){
+                const type = element.type;
+                const elementName = element.name;
+                if(type != "submit"){
+                    element.classList.remove("is-valid");
+                    let helpText = document.querySelector(`#${elementName}-text`);
+                    helpText.classList.remove("text-success"); 
+                }                  
+            }
         }else{
-            form.removeAttribute("novalidate");
             form.reportValidity();
         }
                                
