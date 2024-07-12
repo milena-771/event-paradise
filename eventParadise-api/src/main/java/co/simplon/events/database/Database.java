@@ -14,6 +14,7 @@ public class Database {
 
     private static final Map<Long, Theme> THEMES = new HashMap<>();
 
+    private static Long locationId = 0L;
     private static Long eventId = 0L;
 
     private static final Map<Long, Event> EVENTS = new HashMap<>();
@@ -32,6 +33,12 @@ public class Database {
 	marseille.setId(3L);
 	marseille.setName("Marseille");
 	LOCATIONS.put(marseille.getId(), marseille);
+    }
+
+    public static void save(Location location) {
+	locationId++;
+	LOCATIONS.put(locationId, location);
+
     }
 
     static {
