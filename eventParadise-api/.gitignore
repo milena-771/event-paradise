@@ -6,3 +6,6 @@ target/
 .settings
 .application.properties
 
+.DS_Store
+
+
